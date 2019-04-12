@@ -1,0 +1,80 @@
+# 特定のファイルタイプで読み込む
+[[plugins]]
+repo  = 'Quramy/tsuquyomi'
+on_ft = ['typescript']
+
+# インサートモードに入ったら読み込む
+[[plugins]]
+repo = 'Shougo/neocomplete.vim'
+on_i = 1
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+if = 'has("nvim")'
+hook_source = '''
+  let g:deoplete#enable_at_startup = 1
+  inoremap <expr><tab> pumvisible() ? "\<C-n>" :
+        \ neosnippet#expandable_or_jumpable() ?
+        \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
+'''
+on_i = 1
+
+[[plugins]]
+repo = 'Shougo/neosnippet'
+hook_source = '''
+  imap <C-k> <Plug>(neosnippet_expand_or_jump)
+  smap <C-k> <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k> <Plug>(neosnippet_expand_target)
+  if has('conceal')
+    set conceallevel=2 concealcursor=niv
+  endif
+'''
+on_i  = 1
+on_ft = ['snippet']
+depends = ['neosnippet-snippets']
+
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+on_source = ['Shougo/deoplete.nvim']
+
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+on_source = ['Shougo/deoplete.nvim']
+
+[[plugins]]
+repo = 'zchee/deoplete-jedi'
+on_source = ['Shougo/deoplete.nvim']
+on_ft = 'python'
+
+# ファイル管理
+[[plugins]]
+repo   = 'Shougo/unite.vim'
+
+# 括弧や引用符の自動化
+[[plugins]]
+repo = 'Raimondi/delimitMate'
+on_i = 1
+# hook_post_source = '''
+#     let delimitMate_matchpairs = "(:),[:],{:}"
+#     let b:delimitMate_matchpairs = "(:),[:],{:}"
+#     au FileType html,css let delimitMate_matchpairs = "(:),[:],{:},<:>"
+#     au FileType html,css let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
+# '''
+
+# unite.vim を読み込んだら一緒に読み込む
+[[plugins]]
+repo      = 'Shougo/neomru.vim'
+on_source = ['unite.vim']
+
+# 特定のコマンドを打ったら読み込む
+[[plugins]]
+repo      = 'thinca/vim-prettyprint'
+on_cmd    = ['PP', 'PrettyPrint']
+
+# 特定のマッピングを使ったら読み込む
+# 又、gvim でしか利用しない
+[[plugins]]
+repo   = 'thinca/vim-fontzoom'
+on_cmd = ['Fontzoom']
+on_map = ['<Plug>(fontzoom-']
+gui    = 1
